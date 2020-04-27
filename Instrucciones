@@ -1,0 +1,12 @@
+La API Rest esta desarrollada con el Framework de PHP Slim
+
+*Para ejecutarlo simplemente se debe iniciar un servidor local como XAMPP y copiar los archivos del proyecto en la carpeta utilizada para 
+levantar los proyectos, en el caso de XAMPP C:\xampp\htdocs
+
+Las rutas para realizar las peticiones son las siguientes:
+
+*List (GET): http://localhost:81/taskapp_api_php/public/api/listtasks
+*GetTaskId (GET): http://localhost:81/taskapp_api_php/public/api/gettask --> El parámetro se debe pasar así http://localhost:81/taskapp_api_php/public/api/gettask/2
+*AddTask (POST): http://localhost:81/taskapp_api_php/public/api/addtask
+*UpdateTask (POST): http://localhost:81/taskapp_api_php/public/api/updatetask
+*DeleteTask (POST): http://localhost:81/taskapp_api_php/public/api/deletetask

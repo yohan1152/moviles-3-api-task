@@ -3,6 +3,8 @@ La API Rest esta desarrollada con el Framework de PHP Slim
 *Para ejecutarlo simplemente se debe iniciar un servidor local como XAMPP y copiar los archivos del proyecto en la carpeta utilizada para 
 levantar los proyectos, en el caso de XAMPP C:\xampp\htdocs
 
+*Para importar la base de datos se debe crear en XAMPP una DB con el nombre de taskapp e importar el archivo sql adjunto en la raiz del proyecto.
+
 Las rutas para realizar las peticiones son las siguientes:
 
 *List (GET): http://localhost:81/taskapp_api_php/public/api/listtasks

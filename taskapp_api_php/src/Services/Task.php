@@ -13,15 +13,17 @@ class Task{
             $db = $db->conectionDB();
             $resultado = $db->query($sql);
             if($resultado->rowCount() > 0){
-                $tasks = $resultado->fetchAll(PDO::FETCH_OBJ); 
-                echo json_encode($tasks);
+                $tasks = $resultado->fetchAll(PDO::FETCH_OBJ);
+                http_response_code(200); 
+                echo json_encode(array("tasks"=>$tasks));
             }else{
+                http_response_code(204);
                 echo json_encode(array("response"=>"No tasks registered"));
             }
             $resultado = null;
             $db = null;
         }catch(PDOException $e){
-            echo '{"error" : {"text":'.$e.getMessage().'}';
+            echo json_encode(array("error"=>$e.getMessage()));
         }
     }
 
@@ -36,14 +38,16 @@ class Task{
             $resultado = $db->query($sql);
             if($resultado->rowCount() > 0){
                 $tasks = $resultado->fetchAll(PDO::FETCH_OBJ); 
-                echo json_encode($tasks);
+                http_response_code(200);
+                echo json_encode(array("task"=>$tasks));
             }else{
+                http_response_code(204);
                 echo json_encode(array("response"=>"The task could not be found"));
             }
             $resultado = null;
             $db = null;
         }catch(PDOException $e){
-            echo '{"error" : {"text":'.$e.getMessage().'}';
+            echo json_encode(array("error"=>$e.getMessage()));
         }
     }
 
@@ -60,16 +64,18 @@ class Task{
             $resultado->bindParam(':task',$task);
             $resultado->bindParam(':date',$date);
 
-            if($resultado->execute() == 1){
+            if($resultado->execute() == true && $resultado->rowCount() > 0){
+                http_response_code(200);
                 echo json_encode(array("response"=>"Task added successfully"));
             }else{
+                http_response_code(400);
                 echo json_encode(array("response"=>"The task could not be added"));
             }
 
             $resultado = null;
             $db = null;
         }catch(PDOException $e){
-            echo '{"error" : {"text":'.$e.getMessage().'}';
+            echo json_encode(array("error"=>$e.getMessage()));
         }
     }
 
@@ -87,16 +93,18 @@ class Task{
             $resultado->bindParam(':task',$task);
             $resultado->bindParam(':date',$date);
 
-            if($resultado->execute() == 1){
+            if($resultado->execute() == true && $resultado->rowCount() > 0){
+                http_response_code(200);
                 echo json_encode(array("response"=>"Task updated successfully"));
             }else{
+                http_response_code(404);
                 echo json_encode(array("response"=>"The task could not be updated"));
             }
             
             $resultado = null;
             $db = null;
         }catch(PDOException $e){
-            echo '{"error" : {"text":'.$e.getMessage().'}';
+            echo json_encode(array("error"=>$e.getMessage()));
         }
     }
 
@@ -112,16 +120,18 @@ class Task{
 
             $resultado->bindParam(':id',$id);
 
-            if($resultado->execute() == 1){
+            if($resultado->execute() == true && $resultado->rowCount() > 0){
+                http_response_code(200);
                 echo json_encode(array("response"=>"Task deleted successfully"));
             }else{
+                http_response_code(404);
                 echo json_encode(array("response"=>"The task could not be deleted"));
             }
             
             $resultado = null;
             $db = null;
         }catch(PDOException $e){
-            echo '{"error" : {"text":'.$e.getMessage().'}';
+            echo json_encode(array("error"=>$e.getMessage()));
         }
     }
 }
